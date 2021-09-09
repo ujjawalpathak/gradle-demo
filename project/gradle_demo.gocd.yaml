@@ -8,7 +8,7 @@ pipelines:
     environment_variables:
     materials:
       git:
-        git: https://github.com/ujjwalvns/gradle-demo/tree/master/project
+        git: https://github.com/ujjwalvns/gradle-demo/tree/master/project.git
         shallow_clone: true
         auto_update: true
         branch: master

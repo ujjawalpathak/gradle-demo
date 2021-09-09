@@ -1,2 +1,0 @@
-com/example/DemoTest.java
- com.example.DemoTest

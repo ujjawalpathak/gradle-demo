@@ -30,7 +30,7 @@ pipelines:
                 configuration:
                   options:
                     Image: ${DOCKERHUB_USERNAME}/gradle-service
-                    Tag: ${GO_REVISION}
+                    Tag: "${git[:8]}"
             tasks:
             - exec:
                 arguments:
@@ -47,6 +47,6 @@ pipelines:
             - exec:
                 arguments:
                 - -c
-                - docker build -t $DOCKERHUB_USERNAME/gradle-service:${GIT_REVISION} . -f Dockerfile
+                - docker build -t $DOCKERHUB_USERNAME/gradle-service:"${git[:8]}" . -f Dockerfile
                 command: /bin/bash
                 run_if: passed

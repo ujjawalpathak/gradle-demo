@@ -38,7 +38,6 @@ pipelines:
                 - gradle build
                 command: /bin/sh
                 run_if: passed
-            tasks:
             - exec:
                 arguments:
                 - -c

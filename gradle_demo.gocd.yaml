@@ -30,7 +30,7 @@ pipelines:
                 configuration:
                   options:
                     Image: ${DOCKERHUB_USERNAME}/gradle-service
-                    Tag: ${GO_PIPELINE_LABEL}
+                    Tag: ${GO_REVISION}
             tasks:
             - exec:
                 arguments:

@@ -23,24 +23,10 @@ pipelines:
           build_project:
             timeout: 0
             elastic_profile_id: demo-app
-            artifacts:
-            - external:
-                id: dockerhub
-                store_id: dockerhub
-                configuration:
-                  options:
-                    Image: ${DOCKERHUB_USERNAME}/gradle-service
-                    Tag: ${GO_PIPELINE_LABEL}
             tasks:
             - exec:
                 arguments:
                 - -c
                 - gradle build
                 command: /bin/sh
-                run_if: passed
-            - exec:
-                arguments:
-                - -c
-                - docker build -t $DOCKERHUB_USERNAME/gradle-service:$GO_PIPELINE_LABEL . -f Dockerfile
-                command: /bin/bash
                 run_if: passed

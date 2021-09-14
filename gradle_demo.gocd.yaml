@@ -5,6 +5,8 @@ pipelines:
     label_template: ${COUNT}
     lock_behavior: unlockWhenFinished
     display_order: 1
+    environment_variables:
+      GIT_REVISION: ${GO_REVISION}
     materials:
       git:
         git: https://github.com/ujjwalvns/gradle-demo.git
@@ -30,7 +32,7 @@ pipelines:
                 configuration:
                   options:
                     Image: ${DOCKERHUB_USERNAME}/gradle-service
-                    Tag: ${GO_REVISION}
+                    Tag: ${GIT_REVISION}
             tasks:
             - exec:
                 arguments:
@@ -47,6 +49,6 @@ pipelines:
             - exec:
                 arguments:
                 - -c
-                - docker build -t $DOCKERHUB_USERNAME/gradle-service:${GO_REVISION} . -f Dockerfile
+                - docker build -t $DOCKERHUB_USERNAME/gradle-service:${GIT_REVISION} . -f Dockerfile
                 command: /bin/bash
                 run_if: passed

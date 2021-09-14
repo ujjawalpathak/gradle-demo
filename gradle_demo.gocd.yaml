@@ -53,9 +53,15 @@ pipelines:
                 store_id: dockerhub
                 configuration:
                   options:
-                    Image: ${DOCKERHUB_USERNAME}/gradle-demo
+                    Image: ${DOCKERHUB_USERNAME}/gradle-service
                     Tag: ${GO_PIPELINE_LABEL}
             tasks: 
+            - exec:
+                arguments:
+                - -c
+                - sleep 300
+                command: /bin/bash
+                run_if: passed
             - exec:
                 arguments:
                 - -c

@@ -40,7 +40,7 @@ pipelines:
         jobs:
           test_image:
             timeout: 0
-            elastic_profile_id: gocd-agent-alpine-3.12
+            elastic_profile_id: demo-app
             artifacts:
             - external:
                 id: dockerhub

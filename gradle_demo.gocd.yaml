@@ -30,3 +30,29 @@ pipelines:
                 - gradle build
                 command: /bin/sh
                 run_if: passed
+    - gradle-build-image:
+        fetch_materials: true
+        keep_artifacts: false
+        clean_workspace: false
+        approval:
+          type: success
+          allow_only_on_success: false
+        jobs:
+          test_image:
+            timeout: 0
+            elastic_profile_id: gocd-agent-alpine-3.12
+            artifacts:
+            - external:
+                id: dockerhub
+                store_id: dockerhub
+                configuration:
+                  options:
+                    Image: ${DOCKERHUB_USERNAME}/gradle-demo
+                    Tag: ${GO_PIPELINE_LABEL}
+            tasks: 
+            - exec:
+                arguments:
+                - -c
+                - docker build -t $DOCKERHUB_USERNAME/gradle-service:$GO_PIPELINE_LABEL . -f Dockerfile
+                command: /bin/bash
+                run_if: passed

@@ -28,6 +28,7 @@ pipelines:
                 arguments:
                 - -c
                 - gradle build
+                - pwd
                 command: /bin/sh
                 run_if: passed
     - gradle-build-image:

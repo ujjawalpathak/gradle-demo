@@ -23,16 +23,6 @@ pipelines:
           build_project:
             timeout: 0
             elastic_profile_id: demo-app
-            tasks:
-            - exec:
-                arguments:
-                - -c
-                - gradle build
-                command: /bin/sh
-                run_if: passed
-          build_image:
-            timeout: 0
-            elastic_profile_id: demo-app
             artifacts:
             - external:
                 id: dockerhub
@@ -41,6 +31,13 @@ pipelines:
                   options:
                     Image: ${DOCKERHUB_USERNAME}/gradle-service
                     Tag: ${GO_PIPELINE_LABEL}
+            tasks:
+            - exec:
+                arguments:
+                - -c
+                - gradle build
+                command: /bin/sh
+                run_if: passed
             tasks:
             - exec:
                 arguments:

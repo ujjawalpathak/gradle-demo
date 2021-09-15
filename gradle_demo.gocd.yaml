@@ -25,6 +25,9 @@ pipelines:
             elastic_profile_id: demo-app
             artifacts:
             artifacts:
+            - build:
+               source: tag.sh
+               destination:
             - external:
                 id: dockerhub
                 store_id: dockerhub

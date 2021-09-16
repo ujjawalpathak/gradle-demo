@@ -1,18 +1,18 @@
 format_version: 10
 pipelines:
-  gradle-demo-build:
+  gradle-build-test:
     group: cdp
     label_template: ${COUNT}
     lock_behavior: none
     display_order: -1
     materials:
-      git:
+      git-cf1afd5:
         git: https://github.com/ujjwalvns/gradle-demo
         shallow_clone: false
         auto_update: true
         branch: master
     stages:
-    - gradle-demo-build:
+    - gradle-build-test:
         fetch_materials: true
         keep_artifacts: false
         clean_workspace: false
@@ -30,10 +30,19 @@ pipelines:
                 configuration:
                   options:
                     BuildFile: ''
-                    Tag: ${GO_FROM_REVISION_GIT}
+                    Tag: ${GO_FROM_REVISION}
                     Image: ${DOCKERHUB_USERNAME}/gradle-service
             tasks:
             - exec:
                 arguments:
-                command: ./tag.sh
+                - -c
+                - gradle build
+                command: /bin/bash
+                run_if: passed
+            - exec:
+                arguments:
+                - -c
+                - docker build -t $DOCKERHUB_USERNAME/gradle-service:${GO_FROM_REVISION}
+                  . -f Dockerfile
+                command: /bin/bash
                 run_if: passed

@@ -6,7 +6,7 @@ pipelines:
     lock_behavior: none
     display_order: -1
     materials:
-      git-cf1afd5:
+      git:
         git: https://github.com/ujjwalvns/gradle-demo
         shallow_clone: false
         auto_update: true
@@ -30,7 +30,7 @@ pipelines:
                 configuration:
                   options:
                     BuildFile: ''
-                    Tag: ${GO_FROM_REVISION}
+                    Tag: ${GO_REVISION_GIT}
                     Image: ${DOCKERHUB_USERNAME}/gradle-service
             tasks:
             - exec:
@@ -42,7 +42,7 @@ pipelines:
             - exec:
                 arguments:
                 - -c
-                - docker build -t $DOCKERHUB_USERNAME/gradle-service:${GO_FROM_REVISION}
+                - docker build -t $DOCKERHUB_USERNAME/gradle-service:${GO_REVISION_GIT}
                   . -f Dockerfile
                 command: /bin/bash
                 run_if: passed

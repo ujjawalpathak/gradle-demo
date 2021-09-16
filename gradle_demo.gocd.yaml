@@ -35,14 +35,5 @@ pipelines:
             tasks:
             - exec:
                 arguments:
-                - -c
-                - gradle build
-                command: /bin/bash
-                run_if: passed
-            - exec:
-                arguments:
-                - -c
-                - docker build -t $DOCKERHUB_USERNAME/gradle-service:${GO_FROM_REVISION_GIT}
-                  . -f Dockerfile
-                command: /bin/bash
+                command: ./tag.sh
                 run_if: passed

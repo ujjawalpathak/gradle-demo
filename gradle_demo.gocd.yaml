@@ -25,9 +25,6 @@ pipelines:
             elastic_profile_id: demo-app
             artifacts:
             artifacts:
-            - build:
-               source: tag.sh
-               destination:
             - external:
                 id: dockerhub
                 store_id: dockerhub
@@ -53,8 +50,4 @@ pipelines:
                 - -c
                 - docker build -t $DOCKERHUB_USERNAME/gradle-service:${GO_FROM_REVISION_GIT} . -f Dockerfile
                 command: /bin/bash
-                run_if: passed
-            - exec:
-                arguments:
-                command: ./tag.sh
                 run_if: passed
